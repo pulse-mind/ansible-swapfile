@@ -11,7 +11,7 @@
     path: /swap
     owner: root
     group: root
-    mode: 600
+    mode: 0600
   when: swapfile_size != False
   tags: [configuration, swap]
 
