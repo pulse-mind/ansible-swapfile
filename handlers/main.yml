@@ -1,3 +1,4 @@
 ---
-- name: Reload sysctl
+# handlers file for swapfile
+- name: reload sysctl
   command: sysctl -p

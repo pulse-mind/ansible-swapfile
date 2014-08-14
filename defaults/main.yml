@@ -1,4 +1,5 @@
 ---
-swapfile_size: 512MB
+# defaults file for swapfile
+swapfile_size: 1G
 swapfile_swappiness: False
 swapfile_vfs_cache_pressure: False
