@@ -4,7 +4,7 @@ Ansible role to manage a swap file in Debian-like systems.
 
 #### Requirements
 
-None
+* `fallocate`
 
 ## Variables
 
