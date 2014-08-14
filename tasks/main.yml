@@ -1,29 +1,29 @@
 ---
 # tasks file for swapfile
 - name: write swap file
-  command: fallocate -l {{ swapfile_size }} /swapfile creates=/swapfile
+  command: fallocate -l {{ swapfile_size }} /swap creates=/swap
   register: write_swapfile
   when: swapfile_size != false
   tags: [configuration, swap]
 
 - name: set swap file permissions
-  file: path=/swapfile mode=600
+  file: path=/swap mode=600
   when: swapfile_size != false
   tags: [configuration, swap]
 
 - name: create swap file
-  command: mkswap /swapfile
+  command: mkswap /swap
   register: create_swapfile
   when: swapfile_size != false and write_swapfile.changed
   tags: [configuration, swap]
 
 - name: enable swapfile
-  command: swapon /swapfile
+  command: swapon /swap
   when: swapfile_size != false and create_swapfile.changed
   tags: [configuration, swap]
 
 - name: add swapfile to /etc/fstab
-  lineinfile: dest=/etc/fstab line="/swapfile   none    swap    sw    0   0" state=present
+  lineinfile: dest=/etc/fstab line="/swap   none    swap    sw    0   0" state=present
   when: swapfile_size != false
   tags: [configuration, swap]
 
