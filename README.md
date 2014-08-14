@@ -1,4 +1,4 @@
-## swapfile
+## swapfile [![Build Status](https://travis-ci.org/Oefenweb/ansible-swapfile.svg?branch=master)](https://travis-ci.org/Oefenweb/ansible-swapfile)
 
 Ansible role to manage a swap file in Debian-like systems.
 
