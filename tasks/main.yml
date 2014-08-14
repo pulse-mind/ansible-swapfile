@@ -3,38 +3,54 @@
 - name: write swap file
   command: fallocate -l {{ swapfile_size }} /swap creates=/swap
   register: write_swapfile
-  when: swapfile_size != false
+  when: swapfile_size != False
   tags: [configuration, swap]
 
 - name: set swap file permissions
-  file: path=/swap mode=600
-  when: swapfile_size != false
+  file:
+    path: /swap
+    owner: root
+    group: root
+    mode: 600
+  when: swapfile_size != False
   tags: [configuration, swap]
 
 - name: create swap file
   command: mkswap /swap
   register: create_swapfile
-  when: swapfile_size != false and write_swapfile.changed
+  when: swapfile_size != False and write_swapfile.changed
   tags: [configuration, swap]
 
 - name: enable swapfile
   command: swapon /swap
-  when: swapfile_size != false and create_swapfile.changed
+  when: swapfile_size != False and create_swapfile.changed
   tags: [configuration, swap]
 
 - name: add swapfile to /etc/fstab
-  lineinfile: dest=/etc/fstab line="/swap   none    swap    sw    0   0" state=present
-  when: swapfile_size != false
+  mount:
+    name: none
+    src: /swap
+    fstype: swap
+    opts: sw
+    passno: 0
+    dump: 0
+    state: present
   tags: [configuration, swap]
 
 - name: configure vm.swappiness
-  lineinfile: dest=/etc/sysctl.conf line="vm.swappiness = {{ swapfile_swappiness }}" regexp="^vm.swappiness[\s]?=" state=present
+  sysctl:
+    name: vm.swappiness
+    value: "{{ swapfile_swappiness }}"
+    state: present
   notify: reload sysctl
   when: swapfile_swappiness != false
   tags: [configuration, swap]
 
 - name: configure vm.vfs_cache_pressure
-  lineinfile: dest=/etc/sysctl.conf line="vm.vfs_cache_pressure = {{ swapfile_vfs_cache_pressure }}" regexp="^vm.vfs_cache_pressure[\s]?=" state=present
+  sysctl:
+    name: vm.vfs_cache_pressure
+    value: "{{ swapfile_vfs_cache_pressure }}"
+    state: present
   notify: reload sysctl
   when: swapfile_vfs_cache_pressure != false
   tags: [configuration, swap]
