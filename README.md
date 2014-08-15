@@ -46,6 +46,10 @@ You can also set the variables described above in `group_vars` or `host_vars` (s
 
 MIT
 
+#### Author Information
+
+Mischa ter Smitten (based on work of kamaln7)
+
 #### Feedback, bug-reports, requests, ...
 
 Are [welcome](https://github.com/Oefenweb/ansible-swapfile/issues)!
