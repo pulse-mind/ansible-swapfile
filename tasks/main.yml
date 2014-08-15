@@ -3,7 +3,7 @@
 - name: write swap file
   command: fallocate -l {{ swapfile_size }} /swap creates=/swap
   register: write_swapfile
-  when: swapfile_size != False
+  when: swapfile_size != false
   tags: [configuration, swap]
 
 - name: set swap file permissions
@@ -12,18 +12,18 @@
     owner: root
     group: root
     mode: 0600
-  when: swapfile_size != False
+  when: swapfile_size != false
   tags: [configuration, swap]
 
 - name: create swap file
   command: mkswap /swap
   register: create_swapfile
-  when: swapfile_size != False and write_swapfile.changed
+  when: swapfile_size != false and write_swapfile.changed
   tags: [configuration, swap]
 
 - name: enable swapfile
   command: swapon /swap
-  when: swapfile_size != False and create_swapfile.changed
+  when: swapfile_size != false and create_swapfile.changed
   tags: [configuration, swap]
 
 - name: add swapfile to /etc/fstab
