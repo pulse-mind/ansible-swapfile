@@ -33,6 +33,8 @@ script:
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
 
-
 notifications:
   email: false
+  hipchat:
+    rooms:
+      secure: SivIIyIfrzgQ/crgx9+JLxNhMGCGX/SggBkR59GdBx7tKjLKUReqHuG0NvJd6m0sYgaJqWVYnpXThwWPa7+k+PvisVf/RrfKWzmfK11WZctgq9JDZxrNnHROVgrNvoVKebD/pj0ZtLaMff+ECmBkRGnurFbIMXhT6StxHlPqiEE=
