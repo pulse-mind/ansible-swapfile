@@ -16,9 +16,9 @@ Ansible role to manage a swap file in Debian-like systems.
 
 ### Optional
 
-The following variables are set to `False` by default and will not have any effect on your hosts. Setting them to any value other than `False` will update your hosts' sysctl.conf file.
+The following variables are set to `False` by default and will not have any effect on your hosts. Setting them to any value other than `False` will update your hosts' `sysctl.conf` file.
 
-* `swapfile_swappiness` [default: `False`]: the swappiness percentage (vm.swappiness) -- the lower it is, the less your system swaps memory pages
+* `swapfile_swappiness` [default: `False`]: the swappiness percentage (`vm.swappiness`) -- the lower it is, the less your system swaps memory pages
 
 * `swapfile_vfs_cache_pressure` [default: `False`]: "this percentage value controls the tendency of the kernel to reclaim the memory which is used for caching of directory and inode objects."
 
