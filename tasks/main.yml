@@ -1,5 +1,5 @@
----
 # tasks file for swapfile
+---
 - name: write swap file
   command: "fallocate -l {{ swapfile_size }} {{ swapfile_file }}"
   args:
