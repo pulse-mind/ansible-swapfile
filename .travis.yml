@@ -45,6 +45,7 @@ matrix:
   allow_failures:
     # swapon operation is not permitted
     - env: ANSIBLE_VERSION=latest
+    - env: ANSIBLE_VERSION=1.9.4
     - env: ANSIBLE_VERSION=1.9.3
     - env: ANSIBLE_VERSION=1.9.2
     - env: ANSIBLE_VERSION=1.9.1
