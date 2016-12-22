@@ -1,12 +1,28 @@
 # tasks file for swapfile
 ---
+- name: install dependencies
+  apt:
+    name: "{{ item }}"
+    state: "{{ apt_install_state | default('latest') }}"
+    update_cache: true
+    cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
+  with_items: "{{ swapfile_dependencies }}"
+  tags:
+    - configuration
+    - swapfile
+    - swapfile-install
+    - swapfile-install-dependencies
+
 - name: write swap file
-  command: "fallocate -l {{ swapfile_size }} {{ swapfile_file }}"
+  command: fallocate -l {{ swapfile_size }} {{ swapfile_file }}
   args:
     creates: "{{ swapfile_file }}"
   register: write_swapfile
   when: swapfile_size != false
-  tags: [configuration, swapfile]
+  tags:
+    - configuration
+    - swapfile
+    - swapfile-write-file
 
 - name: set swap file permissions
   file:
@@ -15,18 +31,27 @@
     group: root
     mode: 0600
   when: swapfile_size != false
-  tags: [configuration, swapfile]
+  tags:
+    - configuration
+    - swapfile
+    - swapfile-set-file-permissions
 
 - name: create swap file
-  command: "mkswap {{ swapfile_file }}"
+  command: mkswap {{ swapfile_file }}
   register: create_swapfile
   when: swapfile_size != false and write_swapfile.changed
-  tags: [configuration, swapfile]
+  tags:
+    - configuration
+    - swapfile
+    - swapfile-mkswap
 
 - name: enable swapfile
-  command: "swapon {{ swapfile_file }}"
+  command: swapon {{ swapfile_file }}
   when: swapfile_size != false and create_swapfile.changed
-  tags: [configuration, swapfile]
+  tags:
+    - configuration
+    - swapfile
+    - swapfile-enable-swapfile
 
 - name: add swapfile to /etc/fstab
   mount:
@@ -37,7 +62,10 @@
     passno: '0'
     dump: '0'
     state: present
-  tags: [configuration, swapfile]
+  tags:
+    - configuration
+    - swapfile
+    - swapfile-fstab
 
 - name: configure vm.swappiness
   sysctl:
@@ -46,7 +74,10 @@
     reload: true
     state: present
   when: swapfile_swappiness != false
-  tags: [configuration, swapfile]
+  tags:
+    - configuration
+    - swapfile
+    - swapfile-vm-swappiness
 
 - name: configure vm.vfs_cache_pressure
   sysctl:
@@ -55,4 +86,7 @@
     reload: true
     state: present
   when: swapfile_vfs_cache_pressure != false
-  tags: [configuration, swapfile]
+  tags:
+    - configuration
+    - swapfile
+    - swapfile-vm-vfs-cache-pressure
