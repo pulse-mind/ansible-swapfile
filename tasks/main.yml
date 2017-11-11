@@ -62,6 +62,7 @@
     passno: '0'
     dump: '0'
     state: present
+  when: swapfile_size != false
   tags:
     - configuration
     - swapfile
