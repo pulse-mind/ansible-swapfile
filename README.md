@@ -10,16 +10,9 @@ Ansible role to manage a swap file in Debian-like systems.
 
 ## Variables
 
-* `swapfile_size`: [default: `1G`]: the size of the swap file to create in the format that `fallocate` expects:
-
-  The length and offset arguments may be followed by binary (2^N) suffixes KiB, MiB, GiB, TiB, PiB and EiB (the "iB" is optional, e.g. "K" has the same meaning as "KiB") or decimal (10^N) suffixes KB, MB, GB, PB and EB.
-
-### Optional
-
-The following variables are set to `false` by default and will not have any effect on your hosts. Setting them to any value other than `false` will update your hosts' `sysctl.conf` file.
-
-* `swapfile_swappiness`: [default: `false`]: the swappiness percentage (`vm.swappiness`) -- the lower it is, the less your system swaps memory pages
-* `swapfile_vfs_cache_pressure`: [default: `false`]: "this percentage value controls the tendency of the kernel to reclaim the memory which is used for caching of directory and inode objects."
+* `swapfile_size`: [default: `1G`, `false` to do nothing]: The size of the swap file to create in the format that `fallocate` expects: The length and offset arguments may be followed by binary (2^N) suffixes KiB, MiB, GiB, TiB, PiB and EiB (the "iB" is optional, e.g. "K" has the same meaning as "KiB") or decimal (10^N) suffixes KB, MB, GB, PB and EB.
+* `swapfile_swappiness`: [optional]: The swappiness percentage (`vm.swappiness`) -- the lower it is, the less your system swaps memory pages
+* `swapfile_vfs_cache_pressure`: [optional]: This percentage value controls the tendency of the kernel to reclaim the memory which is used for caching of directory and inode objects
 
 ## Dependencies
 
@@ -42,8 +35,6 @@ or:
       swapfile_size: 1GB
       swapfile_swappiness: 10
 ```
-
-You can also set the variables described above in `group_vars` or `host_vars` (see `defaults/main.yml`).
 
 #### License
 
