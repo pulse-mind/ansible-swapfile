@@ -1,6 +1,6 @@
 ## swapfile
 
-[![Build Status](https://travis-ci.org/Oefenweb/ansible-swapfile.svg?branch=master)](https://travis-ci.org/Oefenweb/ansible-swapfile) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-swapfile-blue.svg)](https://galaxy.ansible.com/tersmitten/swapfile)
+[![Build Status](https://travis-ci.org/Oefenweb/ansible-swapfile.svg?branch=master)](https://travis-ci.org/Oefenweb/ansible-swapfile) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-swapfile-blue.svg)](https://galaxy.ansible.com/Oefenweb/swapfile)
 
 Ansible role to manage a swap file in Debian-like systems.
 
