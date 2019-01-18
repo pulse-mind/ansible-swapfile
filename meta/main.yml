@@ -1,7 +1,7 @@
 # meta file for swapfile
 ---
 galaxy_info:
-  role_name: ant
+  role_name: swapfile
   author: Mischa ter Smitten
   company: Oefenweb.nl B.V.
   description: Manage a swap file in Debian-like systems

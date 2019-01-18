@@ -48,7 +48,7 @@
       swapon {{ swapfile_file }}
     args:
       warn: false
-    when: _create_swapfile.changed
+    when: _create_swapfile is changed
     tags:
       - swapfile-enable-swapfile
 
@@ -64,6 +64,7 @@
     tags:
       - swapfile-fstab
 
+  # TODO: Changing this to `when: swapfile_size` seems to fail, find out why
   when: swapfile_size != false
   tags:
     - configuration
