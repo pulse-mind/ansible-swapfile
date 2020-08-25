@@ -5,3 +5,6 @@
   become: true
   roles:
     - ../../
+  vars:
+    swapfile_swappiness: 1
+    swapfile_vfs_cache_pressure: 50
