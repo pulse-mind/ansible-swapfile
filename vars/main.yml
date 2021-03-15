@@ -1,4 +1,4 @@
-# vars file for swapfile
+# vars file
 ---
 swapfile_dependencies:
   - util-linux
