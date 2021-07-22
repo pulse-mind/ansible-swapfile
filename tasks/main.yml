@@ -1,11 +1,10 @@
 # tasks file
 ---
 - name: install dependencies
-  apt:
+  package:
     name: "{{ swapfile_dependencies }}"
     state: "{{ apt_install_state | default('latest') }}"
     update_cache: true
-    cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
   tags:
     - configuration
     - swapfile
@@ -48,7 +47,9 @@
         swapon {{ swapfile_file }}
       args:
         warn: false
-      when: _create_swapfile is changed
+      when:
+        - _create_swapfile is changed
+        - not swap_test_mode
       tags:
         - swapfile-enable-swapfile
 
