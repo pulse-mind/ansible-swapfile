@@ -47,7 +47,9 @@
         swapon {{ swapfile_file }}
       args:
         warn: false
-      when: _create_swapfile is changed
+      when:
+        - _create_swapfile is changed
+        - not swap_test_mode
       tags:
         - swapfile-enable-swapfile
 
